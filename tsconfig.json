@@ -18,9 +18,12 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": ["./src/*"],
-      "@com/*":["@/components/*"]
+    "paths": {  
+      "@/*": ["./src/*"],   
+      "@cn":["./src/shadcn/utils"],
+      "@cmpnt/*":["./src/components/*"],
+      "@/comp/*":["./src/components/*"],
+      "@comp/*":["./src/components/*"]
     }
   },
   "include": [
