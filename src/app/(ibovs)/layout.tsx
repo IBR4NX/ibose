@@ -24,7 +24,7 @@ export default function Layout({
 					<a href='#e'> end </a>
 				</Header>
 
-				<div className='fhlex relative h-[3000px]'>{children}</div>
+				<div className='fhlex relative h-550'>{children}</div>
 			</SidebarProvider>
 		</>
 	);
