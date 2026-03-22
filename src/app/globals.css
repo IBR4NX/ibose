@@ -172,30 +172,30 @@
     stroke-dashoffset: 00;
   }
  95%, 100% {
-    stroke-width:10px;
+    /* stroke-width:10px; */
     stroke-dasharray: 10 565;
     stroke-dashoffset: 0;
   }
 }
 @keyframes loading {
   0%{ 
-  opacity: 0.9;
+  /* opacity: 0.9; */
   transform: scale(1);
   }
   30% {
-    opacity: 0.5;
+    /* opacity: 0.5; */
     transform: scale(1.1);
   }
   50% {
-    opacity: 0.8;
+    /* opacity: 0.8; */
     transform: scale(1.05);
   }
   70%{
-    opacity: 0.5;
+    /* opacity: 0.5; */
     transform: scale(1.1);
   }
   100%{
-    opacity: 0.9;
+    /* opacity: 0.9; */
     transform: scale(1);
   }
 }

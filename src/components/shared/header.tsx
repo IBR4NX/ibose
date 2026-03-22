@@ -1,62 +1,66 @@
-"use client"
-import React from 'react';
-// #######################
-//import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
+'use client';
 import { cn } from '@cn';
-import { ThemeToggle, ColorToggle, ModeToggle } from './toggles/themeToggle';
-//import { DynamicIcon } from "lucide-react/dynamic";
-export function Header({ children, className, ...props }: React.ComponentProps<'header'>) {
-  const [isTop, setIsTop] = React.useState(true)
-  React.useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        window.requestAnimationFrame(() => {
-          setIsTop(window.scrollY <= 10);
-          ticking = false;
-        });
-      }
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll as EventListener);
-  }, []);
+import React from 'react';
+import { ColorToggle, ModeToggle } from './toggles/themeToggle';
+import { motion, useScroll, useMotionValueEvent } from 'motion/react';
+export function Header({ children, className }: React.ComponentProps<'div'>) {
+	const [isTop, setIsTop] = React.useState(true);
+	const { scrollY, scrollYProgress } = useScroll();
+	const [hidden, setHidden] = React.useState(false);
+
+	useMotionValueEvent(scrollY, 'change', current => {
+		const previous = scrollY.getPrevious() ?? 0;
+		console.log(current- previous)
+		if (current > previous && current > 500) {
+			setHidden(true);
+		} else if (hidden) {
+			setHidden(false);
+		}
+		if (!isTop && current < 10) {
+			setIsTop(true);
+		} else if (isTop && current > 10) {
+			setIsTop(false);
+		}
+	});
+
 	return (
-		<header className={cn('bg-card sticky top-0 flex shrink-0 items-center gap-2 border-b  p-2   ', 
-		className, !isTop&&"drop-shadow-md/25" ,"drop-shadow-foreground")}
-		{...props}
-		>
-			{/*
-				<ClerkPro(vider>
-						<Show when='signed-out'>
-							<SignInButton />
-							<SignUpButton>
-								<button className='bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer'>
-									Sign Up
-								</button>
-							</SignUpButton>
-						</Show>
-						<Show when='signed-in'>i
-							<UserButton />
-						</Show>
-				</ClerkProvider>
-						*/}
-						{children}
-					    <div className='mr-auto flex gap-1 items-center '>
-					    <ColorToggle />
-					    <ModeToggle />
-                {/*
-                <DynamicIcon
-                  name='camera'
-                  color='red'
-                  size={24}
-                  strokeWidth={2}
-                />
-                <ThemeToggle />
-                <Search/>
-                */}
-              </div>
-		</header>
+		<div className=' relative ab min-h-14'>
+			<motion.header
+				className={cn(
+					'bg-card fixed z-40 top-0 inset-x-0 flex shrink-0 items-center gap-2 border-b  p-2   ',
+					className,
+					!isTop && 'drop-shadow-md/25',
+					'drop-shadow-foreground'
+				)}
+				animate={{
+					y: hidden ? -50.7: 0
+					//opacity: hidden ? 0 : 1,
+				}}
+				transition={{ duration: 0.3, ease: 'easeInOut', delay: 0.3 }}
+				//{...props}
+			>
+				{children}
+				<div className='mr-auto flex gap-1 items-center '>
+					<ColorToggle />
+					<ModeToggle />
+				</div>
+				<motion.div
+					id='scroll-indicator'
+					style={{
+						scaleX: scrollYProgress,
+
+						bottom: -1,
+						left: 0,
+						right: 0,
+						height: 2,
+						originX: 0
+					}}
+					className={cn(
+						' absolute bg-primary '
+						//`${isTop?"h-1!":"h-4!"}`
+					)}
+				/>
+			</motion.header>
+		</div>
 	);
 }

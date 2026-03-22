@@ -18,9 +18,11 @@
         "name": "next"
       }
     ],
+    
     "paths": {  
       "@/*": ["./src/*"],   
       "@cn":["./src/shadcn/utils"],
+      "@test/*":["./src/test/*"],
       "@cmpnt/*":["./src/components/*"],
       "@/comp/*":["./src/components/*"],
       "@comp/*":["./src/components/*"]
@@ -34,5 +36,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [".git","no_node_modules"]
 }

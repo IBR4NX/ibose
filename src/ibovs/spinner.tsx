@@ -29,7 +29,7 @@ export function Spinner({
   ...props
 }: SpinnerProps) {
   const center = Number(radius) + Number(strokeWidth); // مركز الدائرة
-  console.log(className,strokeColor,spinDuration, dashDuration)
+//  console.log(className,strokeColor,spinDuration, dashDuration)
   return (
     <svg
       width={size}

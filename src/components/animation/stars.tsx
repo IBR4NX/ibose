@@ -31,7 +31,7 @@ function generateStars(count: number, starColor: string) {
 
 function StarLayer({
   count = 1000,
-  size = 1,
+  size =3,
   transition = { repeat: Infinity, duration: 50, ease: 'linear' },
   starColor = '#fff',
   className,
@@ -40,7 +40,7 @@ function StarLayer({
   const [boxShadow, setBoxShadow] = React.useState<string>('');
 
   React.useEffect(() => {
-    setBoxShadow(generateStars(count, starColor));
+    setBoxShadow(generateStars(count, `var(--color-foreground)`));
   }, [count, starColor]);
 
   return (
@@ -48,17 +48,18 @@ function StarLayer({
       data-slot="star-layer"
       animate={{ y: [0, -2000] }}
       transition={transition}
-      className={cn("absolute top-0 start-0 w-full h-[2000px]", className)}
+      className={cn("absolute  top-0 -z-10 start-0 w-full h-[2000px]", className)}
       {...props}
     >
       <div
-        className="absolute bg-transparent rounded-full"
+        className="absolute bg-transparent bg-amber-500 rounded-full"
         style={{
           width: `${size}px`,
           height: `${size}px`,
           boxShadow: boxShadow,
         }}
       />
+      
       <div
         className="absolute bg-transparent rounded-full top-[2000px]"
         style={{
@@ -67,6 +68,7 @@ function StarLayer({
           boxShadow: boxShadow,
         }}
       />
+    
     </motion.div>
   );
 }
@@ -111,7 +113,7 @@ function StarsBackground({
     <div
       data-slot="stars-background"
       className={cn(
-        "relative size-full overflow-hidden bg-[radial-gradient(ellipse_at_bottom,_#262626_0%,_#000_100%)]",
+        "relative size-full overflow-hidden bg-[radial-gradhient(ellipse_at_bottom,_#262626_0%,_#000_100%)]",
         className,
       )}
       onMouseMove={handleMouseMove}
