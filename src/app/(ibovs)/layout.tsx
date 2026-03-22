@@ -2,6 +2,7 @@
 import { motion, useScroll } from 'motion/react';
 import React, { useState, useEffect, ReactNode } from 'react';
 import { Header } from '@/components/shared/header';
+import { SidebarProvider } from '@/components/ui/sidebar';
 export default function Layout({
 	children
 }: Readonly<{
@@ -17,6 +18,8 @@ export default function Layout({
 	if (loading) return null;
 	return (
 		<>
+		<SidebarProvider>
+
 			<Header>
 				<a href='#t'> top </a>
 				<a href='#e'> end </a>
@@ -29,6 +32,7 @@ export default function Layout({
 				{children}
 				
 			</div>
+		</SidebarProvider>
 		</>
 	);
 }
