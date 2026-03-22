@@ -8,7 +8,7 @@ export default function Layout({
 }: Readonly<{
 	children: ReactNode;
 }>) {
-  const { scrollYProgress}= useScroll()
+	const { scrollYProgress } = useScroll();
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		const timer = setTimeout(() => setLoading(false), 0);
@@ -18,21 +18,14 @@ export default function Layout({
 	if (loading) return null;
 	return (
 		<>
-		<SidebarProvider>
+			<SidebarProvider>
+				<Header>
+					<a href='#t'> top </a>
+					<a href='#e'> end </a>
+				</Header>
 
-			<Header>
-				<a href='#t'> top </a>
-				<a href='#e'> end </a>
-			
-			
-			</Header>
-		
-			<div className='fhlex relative h-[3000px]'>
-			
-				{children}
-				
-			</div>
-		</SidebarProvider>
+				<div className='fhlex relative h-[3000px]'>{children}</div>
+			</SidebarProvider>
 		</>
 	);
 }
