@@ -11,7 +11,7 @@ export function Header({ children, className }: React.ComponentProps<"div">) {
 
 	useMotionValueEvent(scrollY, "change", current => {
 		const previous = scrollY.getPrevious() ?? 0;
-		console.log(current - previous);
+		// console.log(current - previous);
 		if (current > previous && current > 500) {
 			setHidden(true);
 		} else if (hidden) {

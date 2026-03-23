@@ -2,6 +2,7 @@
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 import { motion, useMotionValue, useTransform, animate } from 'motion/react';
+import Video from '@/test/video';
 
 export default function UseTransform() {
 	const x = useMotionValue(0);
@@ -25,8 +26,8 @@ export default function UseTransform() {
 	//if(x)console.log(x)
 
 	return (
-		<div>
-			<motion.div style={{ ...container, background }} initial={{ opacity: 0 }} whileInView={{ opacity: 0.5 }}>
+		<div className='bg-ibovs'>
+			<motion.div  style={{ ...container, background }} initial={{ opacity: 0 }} whileInView={{ opacity: 0.5 }}>
 				<motion.div
 					className='icon-container bg-amber-500!'
 					style={{ ...box, x }}
@@ -78,6 +79,7 @@ export default function UseTransform() {
 					</svg>
 				</motion.div>
 			</motion.div>
+			<Video />
 		</div>
 	);
 }
