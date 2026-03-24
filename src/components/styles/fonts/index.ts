@@ -62,6 +62,6 @@ export const fontSans = Geist({
 
 export const fontMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-geist-mono",
 })
 export default { amiri, amiriQuran, arefRuqaa, notoArabic, lateef,inter,roboto_mono, fontMono, fontSans} 

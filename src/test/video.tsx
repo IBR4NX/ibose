@@ -1,68 +1,81 @@
-import { useRef, useState } from 'react';
-
+import { useRef, useState } from "react";
+import { RiPlayLine, RiPauseFill } from "@remixicon/react";
+import { Button } from "@/components/ui";
 // 1. كائن منطق التشغيل (تم إنشاؤه لمحاكاة عمليات معالجة مكلفة)
 class VideoController {
-  constructor() {
-    console.log("Controller initialized! 🛠️"); // ستظهر مرة واحدة فقط
-  }
+	constructor() {
+		console.log("Controller initialized! 🛠️"); // ستظهر مرة واحدة فقط
+	}
 
-  formatTime(seconds: number): string {
-    return new Date(seconds * 1000).toISOString().substr(11, 8);
-  }
+	formatTime(seconds: number): string {
+		return new Date(seconds * 1000).toISOString().substr(11, 8);
+	}
 }
 
 export default function MyVideoPlayer() {
-  const [currentTime, setCurrentTime] = useState(0);
+	const [currentTime, setCurrentTime] = useState(0);
 
-  // 2. Ref للوصول إلى عنصر الفيديو (DOM Reference)
-  const videoRef = useRef<HTMLVideoElement>(null);
+	// 2. Ref للوصول إلى عنصر الفيديو (DOM Reference)
+	const videoRef = useRef<HTMLVideoElement>(null);
 
-  // 3. Ref لكائن التحكم (Logic Reference) - نستخدم هنا نمط الـ Lazy Initialization
-  const controllerRef = useRef<VideoController | null>(null);
+	// 3. Ref لكائن التحكم (Logic Reference) - نستخدم هنا نمط الـ Lazy Initialization
+	const controllerRef = useRef<VideoController | null>(null);
 
-  // التأكد من إنشاء الكائن مرة واحدة فقط وتجاهله في الـ Re-renders اللاحقة
-  if (controllerRef.current === null) {
-    controllerRef.current = new VideoController();
-  }
+	// التأكد من إنشاء الكائن مرة واحدة فقط وتجاهله في الـ Re-renders اللاحقة
+	if (controllerRef.current === null) {
+		controllerRef.current = new VideoController();
+	}
 
-  // وظائف التحكم
-  const handlePlay = () => videoRef.current?.play();
-  const handlePause = () => videoRef.current?.pause();
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
+	// وظائف التحكم
+	const handlePlay = () => videoRef.current?.play();
+	const handleVideo = () => {
+		if (videoRef.current?.paused === false) {
+			videoRef.current?.pause();
+		}else{
+      videoRef.current?.play();
     }
-  };
+	};
+	console.log("x ", videoRef.current?.paused);
+	const handleTimeUpdate = () => {
+		if (videoRef.current) {
+			console.log(videoRef.current.currentSrc);
+			setCurrentTime(videoRef.current.currentTime);
+		}
+	};
 
-  return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      {/* ربط الـ Ref بعنصر الفيديو */}
-      <video
-        ref={videoRef}
-        onTimeUpdate={handleTimeUpdate}
-        width="100%"
-        style={{ borderRadius: '8px' }}
-        src="http://localhost:3000/storage/video.mp4"
-      />
+	return (
+		<div className=" w-2xs bg-amber-200 text-center relative ">
+			{/* ربط الـ Ref بعنصر الفيديو */}
+			<video
+				ref={videoRef}
+				onTimeUpdate={handleTimeUpdate}
+				width="100%"
+				// src="http://localhost:3000/storage/test.mp4"
+			>
+				<source
+					src="/storage/test.mp4"
+					type="video/mp4"
+				/>
+			</video>
 
-      <div style={{ marginTop: '10px' }}>
-        <p>Time: {controllerRef.current.formatTime(currentTime)}</p>
-        
-        <button onClick={handlePlay} style={buttonStyle}>Play</button>
-        <button onClick={handlePause} style={buttonStyle}>Pause</button>
-      </div>
-    </div>
-  );
+			<div
+				className=" absolute top-0 m-auto flex justify-center items-center bg-amber-50/5 size-full"
+				style={{ marginTop: "10px" }}
+			>
+				{/* <p>Time: {controllerRef.current.formatTime(currentTime)}</p> */}
+
+				<Button
+					onClick={handleVideo}
+					className=""
+				>
+          {!videoRef.current?.paused?
+					<RiPauseFill />
+          :
+					<RiPlayLine />
+          }
+				</Button>
+			</div>
+		</div>
+	);
 }
 
-// تنسيق بسيط للأزرار
-const buttonStyle = {
-  margin: '5px',
-  padding: '10px 20px',
-  cursor: 'pointer',
-  backgroundColor: '#0070f3',
-  color: 'white',
-  border: 'none',
-  borderRadius: '5px'
-};
