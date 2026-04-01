@@ -1,4 +1,7 @@
 'use client';
+import { Toaster } from "@/components/ui/sonner"
+import Test from '@/test/test.tsx';
+
 import { motion, useScroll } from 'motion/react';
 import React, { useState, useEffect, ReactNode } from 'react';
 import { Header } from '@/components/shared/header';
@@ -24,8 +27,10 @@ export default function Layout({
 					<a href='#e'> end </a>
 				</Header>
 
-				<div className='fhlex relative h-550 max-w-screen'>{children}</div>
+				<div className='fhlex relatilve min-h-300 min-w-full max-w-screen'>{children}</div>
 			</SidebarProvider>
+			<Toaster/>
+			<Test/>
 		</>
 	);
 }

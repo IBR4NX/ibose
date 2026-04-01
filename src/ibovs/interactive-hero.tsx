@@ -65,8 +65,8 @@ function InteractiveHero() {
 							<Link href='dashboard'>
 								<HoverButton className=' w-full'>إدارة المتجر</HoverButton>
 							</Link>
-							<Link href='register'>
-								<HoverButton className=' w-full'>ابدأ متجرك مجاناً</HoverButton>
+							<Link href='search'>
+								<HoverButton className=' w-full'> search</HoverButton>
 							</Link>
 						</div>
 

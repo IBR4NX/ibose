@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+
+import React, { useRef, useState } from 'react';
 import { RiPlayLine, RiPauseFill } from "@remixicon/react";
 import { Button } from "@/components/ui";
 // 1. كائن منطق التشغيل (تم إنشاؤه لمحاكاة عمليات معالجة مكلفة)
@@ -33,6 +34,7 @@ export default function MyVideoPlayer() {
 			videoRef.current?.pause();
 		}else{
       videoRef.current?.play();
+      // videoRef.
     }
 	};
 	console.log("x ", videoRef.current?.paused);

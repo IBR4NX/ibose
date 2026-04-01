@@ -33,13 +33,11 @@ export default function RootLayout({
 			className={cn('antialiased ',fonts.notoArabic.variable,fonts.lateef.variable, fonts.fontMono.variable, 'font-sans', fonts.fontSans.variable," ")}
 		>
 			<body className={cn(fonts.amiri.variable)}>
-			<div id="t" > </div>
+			<div name="topPage" id="t" > </div>
 				<ThemeProvider>
 					<DirectionProvider dir='rtl'>{children}</DirectionProvider>
 				</ThemeProvider>
-			<div id="e">
-				
-				</div> 
+			<div name="endPage" id="e"></div> 
 			</body>
 		</html>
 	);
