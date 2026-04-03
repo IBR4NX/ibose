@@ -5,7 +5,7 @@ export default async function Home() {
   await wait(60)
 	return (
 		<>
-		<div className="fixed z-40 bg-amber-100">
+		<div className="fixed z-40 bg-amer-100 border border-white top-5 left-20">
 		  
 		<Test/>
 		</div>
