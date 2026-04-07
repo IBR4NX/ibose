@@ -35,10 +35,11 @@ export function Spinner({
       width={size}
       height={size}
       viewBox={`0 0 ${center * 2} ${center * 2}`}
-      className={cn('spinCircle stroke-amber-400 ',className)}
+      className={cn('spinCircle stroke-amber-400 spinner',className)}
       {...props}
     >
       <circle
+      className=""
         cx={center}
         cy={center}
         r={radius}

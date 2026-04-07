@@ -89,6 +89,7 @@
   /* custom */
   --custom-offset: 187;
   --custom-duration: 1.4s;
+  --cust-duration: 2s;
 }
 
 .dark {
@@ -189,57 +190,40 @@
 
 
 .spinCircle {
-  animation: spin 1s linear infinite;
+  animation: spin var(--cust-duration) linear infinite;
 }
 .spinCircle circle {
-  animation: dash 2s linear infinite;
+  animation: dashLoad var(--cust-duration) ease-in-out infinite;
+  stroke-dasharray:600;
+  stroke-dashoffset: 590;
+  transform: rotate(55deg);
+  transform-origin: center;
+}
+@keyframes dashLoad {
+ 0% {
+   stroke-dashoffset:600; 
+ }
+ 50% {
+   stroke-dashoffset:100;
+   transform:rotate(150deg);  
+ }
+ 100% {
+   stroke-dashoffset:590;
+   transform:rotate(420deg);  
+ }
 }
 @keyframes spin {
   to {
-    transform: rotate(-360deg);
-    /* transform-origin: 110px 110px; */
+    transform: rotate(360deg);
   }
-}
-@keyframes dash {
-  0% {
-    stroke-dasharray: 10 565;
-    stroke-dashoffset: 0;
-  }
-  25% {
-    stroke-dasharray: 400 565;
-    stroke-dashoffset: 0;
-  }
-  55%, 70% {
-    stroke-dasharray: 540 565;
-    stroke-dashoffset: 00;
-  }
- 95%, 100% {
-    /* stroke-width:10px; */
-    stroke-dasharray: 10 565;
-    stroke-dashoffset: 0;
-  }
-}
+}  
+
 @keyframes loading {
-  0%{ 
-  /* opacity: 0.9; */
-  transform: scale(1);
-  }
-  30% {
-    /* opacity: 0.5; */
-    transform: scale(1.1);
-  }
-  50% {
-    /* opacity: 0.8; */
-    transform: scale(1.05);
-  }
-  70%{
-    /* opacity: 0.5; */
-    transform: scale(1.1);
-  }
-  100%{
-    /* opacity: 0.9; */
-    transform: scale(1);
-  }
+  0%{ transform: scale(1);}
+  30% {transform: scale(1.1);}
+  50% {transform: scale(1.05);}
+  70%{transform: scale(1.1);}
+  100%{transform: scale(1);}
 }
 
 .container {

@@ -6,7 +6,7 @@
 }
 .spinner {
   
-  animation: rotator var(--custom-duration) linear infinite;
+  animation: rotator var(--custom-duration) linear 1s infinite;
 }
 
 @keyframes rotator {
@@ -16,11 +16,12 @@
 
 .path {
   stroke-dasharray:var(--custom-offset);
-  stroke-dashoffset: 0;
+  stroke-dashoffset: 187;
   transform-origin: center;
+  
   animation:
-  dashLoading var(--custom-duration) ease-in-out infinite,
-  colors calc(var(--custom-duration) * 4) ease-in-out infinite;
+  dashLoading var(--custom-duration) ease-in-out 1s 5,
+  colors calc(var(--custom-duration) * 4) ease-in-out 1s infinite;
 }
 @keyframes colors {
 	0% { stroke: #4285F4; }
@@ -31,13 +32,15 @@
 }
 
 @keyframes dashLoading {
- 0% { stroke-dashoffset:var(--custom-offset); }
+ 0% { 
+   stroke-dashoffset:var(--custom-offset); 
+ }
  50% {
-   stroke-dashoffset:45;
-   transform:rotate(135deg); 
+   stroke-dashoffset:50;
+    transform:rotate(130deg);  
  }
  100% {
-   stroke-dashoffset:var(--custom-offset);
-   transform:rotate(450deg); 
+  stroke-dashoffset:var(--custom-offset);
+    transform:rotate(450deg);  
  }
 }
